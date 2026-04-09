@@ -6,7 +6,7 @@
 # Copyright 2025 Philippe Grégoire <git@pgregoire.xyz>
 #
 # ==================================================================== #
-set -eu
+set -eux
 
 PROGNAME=$(basename -- "${0}")
 PROGBASE=$(d=$(dirname -- "${0}"); cd "${d}" && pwd)
@@ -70,6 +70,15 @@ if [ X = X"${isopath}" ]; then
 	[ X != X"${url}" ] || die 'error: unable to locate URL for target: %s\n' "${VERSION}"
 
 	fname=$(basename "${url}")
+    if [[ "${VERSION}" == "11ltsc" ]]
+    then
+        fname="X23-81951_26100.1742.240906-0331.ge_release_svc_refresh_CLIENT_ENTERPRISES_OEM_x64FRE_en-us.iso"
+
+    fi
+    if [[ "${VERSION}" == "10ltsc" ]]
+    then
+        fname="en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd_257ad90f.iso"
+    fi
 	sha=$(awk "/ ${fname}$/{print \$1;}" "${PROGBASE}/isos.sha256")
 	[ X != X"${sha}" ] || die 'error: unable to locate SHA-256 digest for %s\n' "${fname}"
 elif [ ! -r "${isopath}" ]; then

@@ -2,7 +2,7 @@
 #
 # Start an LXD VM from an image.
 #
-set -eu
+set -eux
 
 PROGBASE=$(d=$(dirname -- "${0}"); cd "${d}" && pwd)
 PROGNAME=$(basename -- "${0}")
@@ -37,4 +37,5 @@ fi
 incus init "win${1}" "win${1}" -c security.secureboot=false
 incus config device add "win${1}" cidata disk source=cloud-init:config
 incus config device add "win${1}" incusagent disk source=agent:config
+incus config device add "win${1}" tpm tpm
 exec incus start "win${1}"

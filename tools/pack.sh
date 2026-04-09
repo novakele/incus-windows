@@ -71,7 +71,7 @@ __EOF__
 
 printf '[+] Launching the VM\n'
 
-incus init "${name}" --empty --vm -c security.secureboot=false -c limits.cpu=4 -c limits.memory=8GB -c image.os=windows -d root,size=30GiB
+incus init "${name}" --empty --vm -c security.secureboot=false -c limits.cpu=4 -c limits.memory=8GB -c image.os=windows -d root,size=50GiB
 incus config device set "${name}" root io.bus=virtio-blk
 incus config device add "${name}" iso disk source="${WINDIR}/${WINFILE}" boot.priority=10
 incus config device add "${name}" incusagent disk source="agent:config"
@@ -82,7 +82,7 @@ if [ X2008 = X"${VERSION}" ]; then
 	incus config set "${name}" security.csm=true
 fi
 
-if [ X11e = X"${VERSION}" ]; then
+if [ X11e = X"${VERSION}" ] || [ "${VERSION}" = "11ltsc" ]; then
 	incus config device add "${name}" tpm tpm
 	incus config device set "${name}" root size=60GiB
 fi
