@@ -23,6 +23,9 @@
         <PathAndCredentials wcm:action="add" wcm:keyValue="3">
          <Path>E:\vioscsi\w10\amd64</Path>
         </PathAndCredentials>
+         <PathAndCredentials wcm:action="add" wcm:keyValue="4">
+         <Path>E:\viosock\2k22\amd64</Path>
+        </PathAndCredentials>
       </DriverPaths>
     </component>
 
